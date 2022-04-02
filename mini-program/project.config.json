@@ -5,8 +5,8 @@
   },
   "setting": {
     "urlCheck": false,
-    "es6": false,
-    "enhance": false,
+    "es6": true,
+    "enhance": true,
     "postcss": true,
     "preloadBackgroundData": false,
     "minified": true,
@@ -42,9 +42,9 @@
     "ignoreUploadUnusedFiles": true
   },
   "compileType": "miniprogram",
-  "libVersion": "2.23.3",
+  "libVersion": "2.11.0",
   "appid": "wxb7ddf2271c8b9469",
-  "projectname": "miniprogram-2",
+  "projectname": "mini-program",
   "debugOptions": {
     "hidedInDevtools": []
   },
