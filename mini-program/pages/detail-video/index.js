@@ -1,66 +1,42 @@
-// pages/detail-video/index.js
+import { getMVDetail, getMVURL, getRelatedVideo } from '../../api/video'
+
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    mvInfo: {},
+    mvURL: {},
+    realtedMV: [],
+    danmuList: [{
+      text: '大美女王净雯',
+      color: '#ff0000',
+      time: 1
+    }, {
+      text: '守护最好的王净雯',
+      color: '#ff00ff',
+      time: 3
+    },
+    {
+      text: '祝她永远快乐',
+      color: '#1aad19',
+      time: 5
+    }]
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
-
+    const id = options.id
+    this.getVideoInfo(id)
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
+  getVideoInfo: function(id) {
+    getMVDetail(id).then(res => {
+      this.setData({ mvInfo: res.data })
+    })
 
-  },
+    getMVURL(id).then(res => {
+      this.setData({ mvURL: res.data})
+    })
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+    getRelatedVideo(id).then(res => {
+      this.setData({ realtedMV: res.data })
+    })
   }
 })
