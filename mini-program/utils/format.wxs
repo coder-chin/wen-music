@@ -1,0 +1,31 @@
+// 大数格式化
+function formatCount(count) {
+  var counter = parseInt(count)
+  if(counter > 100000000) {
+    return (counter / 100000000).toFixed(1) + '亿'
+  } else if(count > 10000) {
+    return (counter / 10000).toFixed(1) + '万'
+  } else {
+    return counter + ''
+  }
+}
+
+// 补零
+function padLeftZero(time) {
+  time = time + ''
+  return ('00' + time).slice(time.length)
+}
+
+// 格式化时长
+function formatDuration(duration) {
+  duration /= 1000
+  var minute = Math.floor(duration / 60)
+  var second = duration % 60
+
+  return padLeftZero(minute) + ':' + padLeftZero(second)
+}
+
+module.exports = {
+  formatCount: formatCount,
+  formatDuration: formatDuration
+}

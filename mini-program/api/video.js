@@ -1,5 +1,9 @@
 import request from '../network/index'
 
+/**
+ * @param {number} offset 偏移量
+ * @param {number} limit 限制获取数量
+ */
 export function getTopMV(offset, limit = 10) {
   return request.get('/top/mv', {
     offset, 
