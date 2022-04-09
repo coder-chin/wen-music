@@ -1,4 +1,3 @@
-<!--components/song-menu-area/index.wxml-->
 <header-area title="{{title}}"></header-area>
 
 <!-- <scroll-view scroll-x class="menu-list" style="width: {{screenWidth}}px;"> -->

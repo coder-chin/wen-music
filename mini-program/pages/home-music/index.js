@@ -27,12 +27,14 @@ Page({
       const recommendSongs = res.tracks.slice(0, 6)
       this.setData({ recommendSongs })
     })
+    // 取出 state 中的数据
     rankingStore.onState("newRanking", this.getRankingHandler(0))
     rankingStore.onState("originRanking", this.getRankingHandler(2))
     rankingStore.onState("upRanking", this.getRankingHandler(3))
   },
 
   getPageData() {
+    // 轮播图数据
     getBanners().then(res => {
       this.setData({ banners: res.banners })
     })
@@ -46,13 +48,6 @@ Page({
     })
   },
 
-  // 点击搜索框
-  handleSearchClick() {
-    wx.navigateTo({
-      url: '/pages/detail-search/index'
-    })
-  },
-
   // 图片加载完，获取图片高度
   handleSwiperImageLoaded() {
     throttleQueryRect(".swiper-image").then(res => {
@@ -62,6 +57,7 @@ Page({
   },
 
   getRankingHandler: function(idx) {
+    // 这里为什么是返回一个函数 ?
     return (res) => {
       if (Object.keys(res).length === 0) return
       const name = res.name
@@ -74,5 +70,15 @@ Page({
         rankings: newRankings
       })
     }
+  },
+
+  // 点击回调
+  handleSearchClick() {
+    wx.navigateTo({
+      url: '/pages/detail-search/index'
+    })
+  },
+  handleClickRecommendSong() {
+
   }
 })

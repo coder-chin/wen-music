@@ -1,4 +1,3 @@
-<!--components/song-menu-item/index.wxml-->
 <wxs src="../../utils/format.wxs" module="format"></wxs>
 <view class="item">
   <view class="top">
