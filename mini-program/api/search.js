@@ -1,4 +1,4 @@
-import request from '../network/index'
+import { request } from '../network/index'
 
 export function getSearchHot() {
   return request.get('/search/hot')

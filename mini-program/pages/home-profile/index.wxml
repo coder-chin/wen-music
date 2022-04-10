@@ -1,2 +1,20 @@
 <!--pages/home-profile/index.wxml-->
-<text>pages/home-profile/index.wxml</text>
+<view class="profile">
+  <van-dialog id="van-dialog" />
+  <van-button 
+    type="primary" 
+    bind:click='handleBtnClick'
+    wx:if="{{tapTimes < 3}}"
+    >{{btnMsg[tapTimes]}}
+  </van-button>
+  <block wx:else>
+    <image 
+     src="https://spacee-1306444757.cos.ap-beijing.myqcloud.com/img/wen.jpg"
+     mode="heightFix"
+     class="image"
+     bindtap="handleImgClick"
+     >
+    </image>
+    <view class="desc">小仙女王净雯~ 🌞</view>
+  </block>
+</view>

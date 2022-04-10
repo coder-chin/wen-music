@@ -1,4 +1,4 @@
-import request from '../network/index'
+import { request } from '../network/index'
 
 /**
  * @param {number} offset 偏移量

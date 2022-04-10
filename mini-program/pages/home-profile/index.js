@@ -1,66 +1,34 @@
-// pages/home-profile/index.js
+import Dialog from '../../miniprogram_npm/@vant/weapp/dialog/dialog';
+
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    tapTimes: 0,
+    btnMsg: {
+      0: '点击查看谁是最可爱的人 🍉',
+      1: '不如再点一下？！🌛',
+      2: '不经历风雨，怎能见彩虹。想知道我是谁？🎨'
+    },
+    dialogMsg: {
+      0: '到底谁才是最可爱的人呢？🎉',
+      1: '再点！！坚持就是胜利！！🍓',
+      2: '噔噔蹬蹬 ~ \n Ta 来啦！！！ 🌈'
+    }
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
+  handleBtnClick() {
+    Dialog.alert({
+      message: this.data.dialogMsg[this.data.tapTimes],
+      theme: 'round-button'
+    }).then(() => {
+      this.setData({
+        tapTimes: this.data.tapTimes + 1
+      })
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  handleImgClick() {
+    Dialog.alert({
+      message: '别点我，要好好保护我哦~ ⛱️'
+    })
   }
 })

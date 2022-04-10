@@ -23,6 +23,13 @@
           "name": "video-detail",
           "pathName": "pages/detail-video/index",
           "query": "id=14498401",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "profile",
+          "pathName": "pages/home-profile/index",
+          "query": "",
           "scene": null,
           "launchMode": "default"
         }
