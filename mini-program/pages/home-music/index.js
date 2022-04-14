@@ -57,7 +57,6 @@ Page({
   },
 
   getRankingHandler: function(idx) {
-    // 这里为什么是返回一个函数 ?
     return (res) => {
       if (Object.keys(res).length === 0) return
       const name = res.name
@@ -78,7 +77,20 @@ Page({
       url: '/pages/detail-search/index'
     })
   },
-  handleClickRecommendSong() {
 
-  }
+  handleMoreClick() {
+    this.navigateToDetailSongsPage('hotRanking')
+  },
+
+  handleRankingItemClick(event) {
+    const idx = event.currentTarget.dataset.idx
+    const rankingName = rankingMap[idx]
+    this.navigateToDetailSongsPage(rankingName)
+  },
+
+  navigateToDetailSongsPage(rankingName) {
+    wx.navigateTo({
+      url: `/pages/detail-songs/index?ranking=${rankingName}&type=rank`,
+    })
+  },
 })

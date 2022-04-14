@@ -30,6 +30,13 @@
           "name": "profile",
           "pathName": "pages/home-profile/index",
           "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "menu",
+          "pathName": "pages/detail-songs/index",
+          "query": "id=2457752542&type=menu",
           "scene": null,
           "launchMode": "default"
         }

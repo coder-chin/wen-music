@@ -1,7 +1,7 @@
 <!--components/header-area/index.wxml-->
 <view class="header">
   <view class="title">{{title}}</view>
-  <view class="right" bindtap="handleClickMore">
+  <view class="right" bindtap="handleClickMore" wx:if="{{showRight}}">
     <view class="slot"><slot></slot></view>
     <view class="default">
       <text>{{rightText}}</text>

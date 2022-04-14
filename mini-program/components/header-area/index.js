@@ -7,12 +7,16 @@ Component({
     rightText: {
       type: String,
       value: '更多'
+    },
+    showRight: {
+      type: Boolean,
+      value: true
     }
   },
 
   methods: {
     handleClickMore() {
-      
+      this.triggerEvent('click')
     }
   }
 })
