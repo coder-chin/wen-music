@@ -37,6 +37,13 @@
           "name": "menu",
           "pathName": "pages/detail-songs/index",
           "query": "id=2457752542&type=menu",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "search",
+          "pathName": "pages/detail-search/index",
+          "query": "",
           "scene": null,
           "launchMode": "default"
         }
