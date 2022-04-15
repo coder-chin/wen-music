@@ -1,5 +1,6 @@
 export default function stringToNodes(keyword, value) {
   const nodes = []
+  // startsWith是ES6新增方法
   if (keyword.toUpperCase().startsWith(value.toUpperCase())) {
     const key1 = keyword.slice(0, value.length)
     const node1 = {

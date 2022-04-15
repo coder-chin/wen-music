@@ -1,4 +1,4 @@
-<header-area title="{{title}}"></header-area>
+<header-area title="{{title}}" showRight="{{false}}"></header-area>
 
 <!-- <scroll-view scroll-x class="menu-list" style="width: {{screenWidth}}px;"> -->
 <scroll-view scroll-x class="menu-list">

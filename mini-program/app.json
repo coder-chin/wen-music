@@ -5,7 +5,8 @@
     "pages/home-profile/index",
     "pages/detail-video/index",
     "pages/detail-search/index",
-    "pages/detail-songs/index"
+    "pages/detail-songs/index",
+    "pages/music-player/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -36,5 +37,6 @@
     ]
   },
   "sitemapLocation": "sitemap.json",
-  "lazyCodeLoading": "requiredComponents"
+  "lazyCodeLoading": "requiredComponents",
+  "requiredBackgroundModes": ["audio"]
 }
