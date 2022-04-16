@@ -1,5 +1,5 @@
-// const BASE_URL = 'https://netease-cloud-music-api-gilt-phi.vercel.app'
-const BASE_URL = 'http://123.207.32.32:9001'
+const BASE_URL = 'https://wen-music.vercel.app'
+// const BASE_URL = 'http://123.207.32.32:9001'
 const LOGIN_BASE_URL = 'http://123.207.32.32:3000'
 const realIP = '116.25.146.177'
 
