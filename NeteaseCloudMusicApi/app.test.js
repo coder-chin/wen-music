@@ -4,7 +4,7 @@ const request = require('request')
 
 let app
 before(() => {
-  app = require('./app.js')
+  app = require('./server.js')
   global.host = 'http://localhost:' + app.server.address().port
   request.debug = false
 })
