@@ -1,7 +1,8 @@
 {
-  "description": "项目配置文件",
+  "description": "项目配置文件，详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
   "packOptions": {
-    "ignore": []
+    "ignore": [],
+    "include": []
   },
   "setting": {
     "urlCheck": false,
@@ -44,21 +45,13 @@
         "packageJsonPath": "./package.json",
         "miniprogramNpmDistDir": "./"
       }
-    ]
+    ],
+    "useStaticServer": true
   },
   "compileType": "miniprogram",
   "libVersion": "2.11.0",
   "appid": "wxb7ddf2271c8b9469",
   "projectname": "mini-program",
-  "debugOptions": {
-    "hidedInDevtools": []
-  },
-  "scripts": {},
-  "staticServerOptions": {
-    "baseURL": "",
-    "servePath": ""
-  },
-  "isGameTourist": false,
   "condition": {
     "search": {
       "list": []
@@ -78,5 +71,9 @@
     "miniprogram": {
       "list": []
     }
+  },
+  "editorSetting": {
+    "tabIndent": "insertSpaces",
+    "tabSize": 2
   }
 }
