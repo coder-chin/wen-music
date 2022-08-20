@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { connect } from 'react-redux'
 import LazyLoad, { forceCheck } from 'react-lazyload'
 
@@ -17,10 +17,11 @@ import {
 import Horizen from '../../UI/Horizen'
 import Scroll from '../../UI/Scroll'
 import Loading from '../../UI/Loading'
+import { CategoryDataContext } from './context'
 
 const Singers = (props) => {
-  const [category, setCategory] = useState('')
-  const [alpha, setAlpha] = useState('')
+  const { data, dispatch } = useContext(CategoryDataContext)
+  const { category, alpha } = data.toJS()
 
   const {
     singerList,
@@ -37,16 +38,23 @@ const Singers = (props) => {
   } = props
 
   useEffect(() => {
-    getHotSingerDispatch()
+    if (!singerList.size) {
+      getHotSingerDispatch()
+    }
   }, [])
 
   let handleUpdateAlpha = (val) => {
-    setAlpha(val)
-    updateDispatch(category, val)
+    if (alpha !== val) {
+      dispatch({ type: CHANGE_ALPHA, data: val })
+      updateDispatch(category, val)
+    }
   }
   let handleUpdateCategory = (val) => {
-    setCategory(val)
-    updateDispatch(val, alpha)
+    // 重复请求只发送一次
+    if (category !== val) {
+      dispatch({ type: CHANGE_CATEGORY, data: val })
+      updateDispatch(val, alpha)
+    }
   }
   let handlePullUp = () => {
     pullUpRefreshDispatch(category, alpha, category === '', pageCount)
@@ -118,17 +126,24 @@ const Singers = (props) => {
 }
 
 const mapStateToProps = (state) => ({
+  // 歌手列表
   singerList: state.getIn(['singers', 'singerList']),
+  // 进入loading效果
   enterLoading: state.getIn(['singers', 'enterLoading']),
+  // 上划到底动画触发
   pullUpLoading: state.getIn(['singers', 'pullUpLoading']),
+  // 下拉到顶动画触发
   pullDownLoading: state.getIn(['singers', 'pullDownLoading']),
+  // 页数
   pageCount: state.getIn(['singers', 'pageCount'])
 })
 const mapDispatchToProps = (dispatch) => {
   return {
+    // 获取初始歌手
     getHotSingerDispatch() {
       dispatch(getHotSingerList())
     },
+    // 改变歌手类别
     updateDispatch(category, alpha) {
       dispatch(changePageCount(0))
       dispatch(changeEnterLoading(true))

@@ -33,12 +33,12 @@ const Recommend = (props) => {
           <RecommendList recommendList={recommendListJS} />
         </div>
       </Scroll>
-      {enterLoading ? <Loading></Loading> : null}
+      <Loading show={enterLoading}></Loading>
     </Content>
   )
 }
 
-// 映射 Redux 全局的 state 到组件的 props 上
+// 映射 state 到 props 上
 const mapStateToProps = (state) => ({
   bannerList: state.getIn(['recommend', 'bannerList']),
   recommendList: state.getIn(['recommend', 'recommendList']),
@@ -56,6 +56,8 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
+// React.memo 提高渲染性能，直接用上一次渲染结果
+// HOC 接收组件作为参数，返回一个新的组件
 export default connect(
   mapStateToProps,
   mapDispatchToProps

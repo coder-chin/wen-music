@@ -16,7 +16,6 @@ export const Top = styled.div`
     }
   }
 `
-
 export const Tab = styled.div`
   height: 44px;
   display: flex;
@@ -24,7 +23,6 @@ export const Tab = styled.div`
   background: ${style['theme-color']};
   a {
     flex: 1;
-    padding: 2px 0;
     font-size: 14px;
     color: #e4e4e4;
     &.selected {
@@ -37,7 +35,6 @@ export const Tab = styled.div`
     }
   }
 `
-
 export const TabItem = styled.div`
   height: 100%;
   display: flex;
@@ -45,5 +42,3 @@ export const TabItem = styled.div`
   justify-content: center;
   align-items: center;
 `
-
-
