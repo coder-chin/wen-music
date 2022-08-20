@@ -7,15 +7,34 @@ import React, {
 } from 'react'
 import BScroll from 'better-scroll'
 import PropTypes from 'prop-types'
-import { ScrollContainer } from './style.js'
+import Loading from '../Loading'
+import LoadingV2 from '../LoadingV2'
+import { ScrollContainer, PullUpLoading, PullDownLoading } from './style.js'
+import { debounce } from '../../api/utils'
 
 // ref 是父组件传过来的
 const Scroll = forwardRef((props, ref) => {
   const [bScroll, setBScroll] = useState()
   const scrollContainerRef = useRef()
 
-  const { direction, click, refresh, bounceTop, bounceBottom } = props
+  const {
+    direction,
+    click,
+    refresh,
+    bounceTop,
+    bounceBottom,
+    pullUpLoading,
+    pullDownLoading
+  } = props
+  // 回调函数
   const { pullUp, pullDown, onScroll } = props
+
+  const PullUpdisplayStyle = pullUpLoading
+    ? { display: '' }
+    : { display: 'none' }
+  const PullDowndisplayStyle = pullDownLoading
+    ? { display: '' }
+    : { display: 'none' }
 
   useEffect(() => {
     const scroll = new BScroll(scrollContainerRef.current, {
@@ -93,12 +112,19 @@ const Scroll = forwardRef((props, ref) => {
   }))
 
   return (
-    <ScrollContainer ref={scrollContainerRef}>{props.children}</ScrollContainer>
+    <ScrollContainer ref={scrollContainerRef}>
+      {props.children}
+      <PullUpLoading style={PullUpdisplayStyle}>
+        <Loading></Loading>
+      </PullUpLoading>
+      <PullDownLoading style={PullDowndisplayStyle}>
+        <LoadingV2></LoadingV2>
+      </PullDownLoading>
+    </ScrollContainer>
   )
 })
 
 Scroll.propTypes = {
-  direction: PropTypes.oneOf(['vertical', 'horizental']),
   direction: PropTypes.oneOf(['vertical', 'horizental']),
   refresh: PropTypes.bool,
   onScroll: PropTypes.func,
