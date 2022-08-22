@@ -4,6 +4,7 @@ import Home from '@/pages/Home'
 import Recommend from '@/pages/Recommend'
 import Singers from '@/pages/Singers'
 import Rank from '@/pages/Rank'
+import Album from '@/pages/Album'
 
 export default [
   {
@@ -13,11 +14,17 @@ export default [
       {
         path: '/',
         exact: true,
-        render: () => <Redirect to={"/recommend"} />
+        render: () => <Redirect to={'/recommend'} />
       },
       {
         path: '/recommend',
-        component: Recommend
+        component: Recommend,
+        routes: [
+          {
+            path: '/recommend/:id',
+            component: Album
+          }
+        ]
       },
       {
         path: '/singers',
@@ -25,7 +32,13 @@ export default [
       },
       {
         path: '/rank',
-        component: Rank
+        component: Rank,
+        routes: [
+          {
+            path: '/rank/:id',
+            component: Album
+          }
+        ]
       }
     ]
   }

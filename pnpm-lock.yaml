@@ -15,6 +15,7 @@ specifiers:
   react-redux: ^8.0.2
   react-router-config: ^5.1.1
   react-router-dom: ^5.3.3
+  react-transition-group: ^4.4.5
   redux: ^4.0.4
   redux-immutable: ^4.0.0
   redux-thunk: ^2.4.1
@@ -33,6 +34,7 @@ dependencies:
   react-redux: 8.0.2_rxpulxqxsibgdk5rs4llgxl6gy
   react-router-config: 5.1.1_react@18.2.0
   react-router-dom: 5.3.3_react@18.2.0
+  react-transition-group: 4.4.5_biqbaboplfbrettd7655fr4n2y
   redux: 4.2.0
   redux-immutable: 4.0.0_immutable@4.1.0
   redux-thunk: 2.4.1_redux@4.2.0
@@ -941,6 +943,13 @@ packages:
     dependencies:
       path-type: 4.0.0
     dev: true
+
+  /dom-helpers/5.2.1:
+    resolution: {integrity: sha512-nRCa7CK3VTrM2NmGkIy4cbK7IZlgBE/PYMn55rrXefr5xXDP0LdtfPnblFDoVdcAfslJ7or6iqAUnx0CCGIWQA==}
+    dependencies:
+      '@babel/runtime': 7.18.9
+      csstype: 3.1.0
+    dev: false
 
   /dom7/2.1.5:
     resolution: {integrity: sha512-xnhwVgyOh3eD++/XGtH+5qBwYTgCm0aW91GFgPJ3XG+jlsRLyJivnbP0QmUBFhI+Oaz9FV0s7cxgXHezwOEBYA==}
@@ -2113,6 +2122,20 @@ packages:
       react-is: 16.13.1
       tiny-invariant: 1.2.0
       tiny-warning: 1.0.3
+    dev: false
+
+  /react-transition-group/4.4.5_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-pZcd1MCJoiKiBR2NRxeCRg13uCXbydPnmB4EOeRrY7480qNWO8IIgQG6zlDkm6uRMsURXPuKq0GWtiM59a5Q6g==}
+    peerDependencies:
+      react: '>=16.6.0'
+      react-dom: '>=16.6.0'
+    dependencies:
+      '@babel/runtime': 7.18.9
+      dom-helpers: 5.2.1
+      loose-envify: 1.4.0
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /react/18.2.0:

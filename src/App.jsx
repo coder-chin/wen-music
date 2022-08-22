@@ -1,5 +1,6 @@
 import { renderRoutes } from 'react-router-config'
 import { Provider } from 'react-redux'
+import { HashRouter } from 'react-router-dom'
 
 import GlobalStyle from '@/assets/style/style'
 import IconStyle from '@/assets/icon/iconfont'

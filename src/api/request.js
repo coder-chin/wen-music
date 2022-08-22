@@ -21,3 +21,7 @@ export const getSingerListRequest = (category, alpha, count) => {
 export const getRankListRequest = () => {
   return musicApi.get(`/toplist/detail`)
 }
+
+export const getAlbumDetailRequest = (id) => {
+  return musicApi.get(`/playlist/detail?id=${id}`)
+}

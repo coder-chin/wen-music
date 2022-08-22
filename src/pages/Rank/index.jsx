@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
+import { renderRoutes } from 'react-router-config'
 
 import Scroll from '../../UI/Scroll'
 import { getRankList } from './store'
@@ -16,6 +17,10 @@ const Rank = (props) => {
   useEffect(() => {
     getRankListDataDispatch()
   }, [])
+  const enterDetail = (detail) => {
+    console.log(detail)
+    props.history.push(`/rank/${detail.id}`)
+  }
 
   let globalStartIndex = filterIndex(rankListJS)
   let officialList = rankListJS.slice(0, globalStartIndex)
@@ -29,7 +34,7 @@ const Rank = (props) => {
             <ListItem
               key={item.coverImgId}
               tracks={item.name}
-              onClick={() => enterDetail(item.name)}
+              onClick={() => enterDetail(item)}
             >
               <div className="img_wrapper">
                 <img src={item.coverImgUrl} alt="" />
@@ -71,6 +76,7 @@ const Rank = (props) => {
           {renderRankList(globalList, true)}
         </div>
       </Scroll>
+      {renderRoutes(props.route.routes)}
     </Container>
   )
 }
