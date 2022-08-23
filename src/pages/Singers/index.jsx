@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { connect } from 'react-redux'
 import LazyLoad, { forceCheck } from 'react-lazyload'
+import { renderRoutes } from 'react-router-config'
 
 import { categoryTypes, alphaTypes } from '../../api/config'
 import { NavContainer, ListContainer, List, ListItem } from './style'
@@ -63,6 +64,10 @@ const Singers = (props) => {
     pullDownRefreshDispatch(category, alpha)
   }
 
+  const enterDetail = (id) => {
+    props.history.push(`/singers/${id}`)
+  }
+
   const singerListJS = singerList ? singerList.toJS() : []
 
   return (
@@ -93,7 +98,7 @@ const Singers = (props) => {
           <List>
             {singerListJS.map((item) => {
               return (
-                <ListItem key={item.picId}>
+                <ListItem key={item.picId} onClick={() => enterDetail(item.id)}>
                   <div className="img_wrapper">
                     <LazyLoad
                       placeholder={
@@ -121,6 +126,8 @@ const Singers = (props) => {
         </Scroll>
         <Loading show={enterLoading}></Loading>
       </ListContainer>
+
+      {renderRoutes(props.route.routes)}
     </div>
   )
 }
