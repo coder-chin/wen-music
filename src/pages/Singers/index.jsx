@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import LazyLoad, { forceCheck } from 'react-lazyload'
 import { renderRoutes } from 'react-router-config'
 
-import { categoryTypes, alphaTypes } from '../../api/config'
+import { categoryTypes, alphaTypes } from '../../constant'
 import { NavContainer, ListContainer, List, ListItem } from './style'
 import {
   getSingerList,
@@ -29,7 +29,8 @@ const Singers = (props) => {
     enterLoading,
     pullUpLoading,
     pullDownLoading,
-    pageCount
+    pageCount,
+    songsCount
   } = props
   const {
     getHotSingerDispatch,
@@ -87,7 +88,7 @@ const Singers = (props) => {
         ></Horizen>
       </NavContainer>
 
-      <ListContainer>
+      <ListContainer play={songsCount}>
         <Scroll
           pullUp={handlePullUp}
           pullDown={handlePullDown}
@@ -142,7 +143,8 @@ const mapStateToProps = (state) => ({
   // 下拉到顶动画触发
   pullDownLoading: state.getIn(['singers', 'pullDownLoading']),
   // 页数
-  pageCount: state.getIn(['singers', 'pageCount'])
+  pageCount: state.getIn(['singers', 'pageCount']),
+  songsCount: state.getIn(['player', 'playList']).size
 })
 const mapDispatchToProps = (dispatch) => {
   return {

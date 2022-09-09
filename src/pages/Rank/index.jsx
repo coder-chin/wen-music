@@ -8,7 +8,7 @@ import { filterIndex } from '../../utils'
 import { Container, List, ListItem, SongList } from './style'
 
 const Rank = (props) => {
-  const { rankList, loading } = props
+  const { rankList, loading, songsCount } = props
   const { getRankListDataDispatch } = props
 
   let rankListJS = rankList ? rankList.toJS() : []
@@ -63,7 +63,7 @@ const Rank = (props) => {
   }
 
   return (
-    <Container>
+    <Container play={songsCount}>
       <Scroll>
         <div>
           <h1 className="offical" style={displayStyle}>
@@ -83,7 +83,8 @@ const Rank = (props) => {
 
 const mapStateToProps = (state) => ({
   rankList: state.getIn(['rank', 'rankList']),
-  loading: state.getIn(['rank', 'loading'])
+  loading: state.getIn(['rank', 'loading']),
+  songsCount: state.getIn(['player', 'playList']).size
 })
 const mapDispatchToProps = (dispatch) => {
   return {

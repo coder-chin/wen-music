@@ -5,7 +5,7 @@ import style from '../../assets/style/global'
 export const Container = styled.div`
   position: fixed;
   top: 90px;
-  bottom: 0;
+  bottom: ${(props) => (props.play ? '60px' : 0)};
   width: 100%;
   .offical,
   .global {
@@ -35,7 +35,7 @@ export const ListItem = styled.li`
   padding: 3px 0;
   border-bottom: 1px solid ${style['border-color']};
   .img_wrapper {
-    width:  ${(props) => (props.tracks.length ? '27vw' : '32vw')};
+    width: ${(props) => (props.tracks.length ? '27vw' : '32vw')};
     height: ${(props) => (props.tracks.length ? '27vw' : '32vw')};
     border-radius: 3px;
     position: relative;
@@ -45,7 +45,8 @@ export const ListItem = styled.li`
       width: 100%;
       height: 35px;
       border-radius: 3px;
-      background: linear-gradient (hsla (0,0%,100%,0),hsla (0,0%,43%,.4));
+      background: linear-gradient
+        (hsla (0, 0%, 100%, 0), hsla (0, 0%, 43%, 0.4));
     }
     img {
       width: 100%;

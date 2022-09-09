@@ -7,19 +7,26 @@ import Header from './../../UI/Header'
 import Scroll from '../../UI/Scroll'
 import Loading from '../../UI/Loading'
 import SongsList from '../../components/SongsList'
+import MusicNote from '../../UI/MusicNote'
 import { isEmptyObject } from '../../utils'
 import style from '../../assets/style/global'
 import { getAlbumList, changeEnterLoading } from './store/actionCreators'
-export const HEADER_HEIGHT = 45
+import { HEADER_HEIGHT } from '../../constant'
 
 function Album(props) {
+  const id = props.match.params.id
+
   const [showStatus, setShowStatus] = useState(true)
   const [title, setTitle] = useState('歌单')
   const [isMarquee, setIsMarquee] = useState(false)
-  const id = props.match.params.id
   const headerEl = useRef()
+  const musicNoteRef = useRef()
 
-  const { currentAlbum: currentAlbumImmutable, enterLoading } = props
+  const {
+    currentAlbum: currentAlbumImmutable,
+    enterLoading,
+    songsCount
+  } = props
   const { getAlbumDataDispatch } = props
   let currentAlbum = currentAlbumImmutable.toJS()
 
@@ -50,6 +57,10 @@ function Album(props) {
     },
     [currentAlbum]
   )
+
+  const musicAnimation = (x, y) => {
+    musicNoteRef.current.startAnimation({ x, y })
+  }
 
   const renderTopDesc = () => {
     return (
@@ -111,7 +122,7 @@ function Album(props) {
       unmountOnExit
       onExited={props.history.goBack}
     >
-      <Container>
+      <Container play={songsCount}>
         <Header
           title={title}
           handleClick={handleBack}
@@ -128,11 +139,13 @@ function Album(props) {
                 collectCount={currentAlbum.subscribedCount}
                 showCollect={true}
                 showBackground={true}
+                musicAnimation={musicAnimation}
               ></SongsList>
             </div>
           </Scroll>
         ) : null}
         {enterLoading ? <Loading></Loading> : null}
+        <MusicNote ref={musicNoteRef}></MusicNote>
       </Container>
     </CSSTransition>
   )
@@ -140,7 +153,8 @@ function Album(props) {
 
 const mapStateToProps = (state) => ({
   currentAlbum: state.getIn(['album', 'currentAlbum']),
-  enterLoading: state.getIn(['album', 'enterLoading'])
+  enterLoading: state.getIn(['album', 'enterLoading']),
+  songsCount: state.getIn(['player', 'playList']).size
 })
 const mapDispatchToProps = (dispatch) => {
   return {
