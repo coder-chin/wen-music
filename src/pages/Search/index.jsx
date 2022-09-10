@@ -7,7 +7,7 @@ import LazyLoad, { forceCheck } from 'react-lazyload'
 import { Container, ShortcutWrapper, HotKey } from './style'
 import { List, ListItem, SongItem } from './style'
 import SearchBox from '../../UI/SearchBox'
-import Scroll from '../../UI/scroll'
+import Scroll from '../../UI/Scroll'
 import Loading from '../../UI/Loading'
 import {
   getHotKeyWords,
