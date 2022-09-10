@@ -8,12 +8,16 @@ import Player from '../Player'
 const Home = (props) => {
   const { route } = props
 
+  const handleClickSearch = () => {
+    props.history.push('/search')
+  }
+
   return (
     <div>
       <Top>
         <span className="iconfont menu">&#xe65c;</span>
         <span className="title">MusicWebApp</span>
-        <span className="iconfont search">&#xe62b;</span>
+        <span className="iconfont search" onClick={() => handleClickSearch()}>&#xe62b;</span>
       </Top>
       <Tab>
         <NavLink to="/recommend" activeClassName="selected">

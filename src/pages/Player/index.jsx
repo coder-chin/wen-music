@@ -15,7 +15,6 @@ import {
 import { getSongUrl, isEmptyObject, shuffle, findIndex } from '../../utils'
 import { playMode } from '../../constant'
 import PlayList from './playList'
-import { getLyricRequest } from '../../api/request'
 
 function Player(props) {
   const {
@@ -77,7 +76,6 @@ function Player(props) {
       })
     })
     togglePlayingDispatch(true) //播放状态
-    getLyric(current.id)
     setCurrentTime(0) //从头开始播放
     setDuration((current.dt / 1000) | 0) //时长
   }, [currentIndex])
@@ -161,22 +159,6 @@ function Player(props) {
     } else {
       handleNext()
     }
-  }
-  const getLyric = (id) => {
-    let lyric = ''
-    getLyricRequest(id)
-      .then((data) => {
-        console.log(data)
-        lyric = data.lrc.lyric
-        if (!lyric) {
-          currentLyric.current = null
-          return
-        }
-      })
-      .catch(() => {
-        songReady.current = true
-        audioRef.current.play()
-      })
   }
 
   return (
