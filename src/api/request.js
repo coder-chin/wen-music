@@ -28,3 +28,6 @@ export const getAlbumDetailRequest = (id) => {
 export const getSingerInfoRequest = (id) => {
   return musicApi.get(`/artists?id=${id}`)
 }
+export const getLyricRequest = (id) => {
+  return musicApi.get(`/lyric?id=${id}`)
+}

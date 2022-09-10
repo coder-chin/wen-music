@@ -7,15 +7,20 @@ import {
   ListHeader,
   ListContent
 } from './style'
-import { prefixStyle, getName } from '../../../utils'
+import { prefixStyle, getName, shuffle, findIndex } from '../../../utils'
 import {
   changeShowPlayList,
   changeCurrentIndex,
   changePlayList,
-  changePlayMode
+  changeSequecePlayList,
+  changePlayMode,
+  deleteSong,
+  changePlayingState,
+  changeCurrentSong
 } from '../store/actionCreators'
 import { playMode } from '../../../constant'
 import Scroll from '../../../UI/Scroll'
+import Confirm from '../../../UI/Confirm'
 
 function PlayList(props) {
   const {
@@ -30,7 +35,9 @@ function PlayList(props) {
     togglePlayListDispatch,
     changeCurrentIndexDispatch,
     changePlayListDispatch,
-    changeModeDispatch
+    changeModeDispatch,
+    deleteSongDispatch,
+    clearDispatch
   } = props
   const currentSong = immutableCurrentSong.toJS()
   const playList = immutablePlayList.toJS()
@@ -40,7 +47,13 @@ function PlayList(props) {
 
   const playListRef = useRef()
   const listWrapperRef = useRef()
+  const confirmRef = useRef()
+  const listContentRef = useRef()
   const [isShow, setIsShow] = useState(false)
+  const [canTouch, setCanTouch] = useState(true)
+  const [startY, setStartY] = useState(0)
+  const [initialed, setInitialed] = useState(0)
+  const [distance, setDistance] = useState(0)
 
   const getCurrentIcon = (item) => {
     // 是不是当前正在播放的歌曲
@@ -81,11 +94,66 @@ function PlayList(props) {
   }
   const changeMode = (e) => {
     let newMode = (mode + 1) % 3
-    // 具体逻辑比较复杂 后面来实现
+    if (newMode === 0) {
+      // 顺序模式
+      changePlayListDispatch(sequencePlayList)
+      let index = findIndex(currentSong, sequencePlayList)
+      changeCurrentIndexDispatch(index)
+    } else if (newMode === 1) {
+      // 单曲循环
+      changePlayListDispatch(sequencePlayList)
+    } else if (newMode === 2) {
+      // 随机播放
+      let newList = shuffle(sequencePlayList)
+      let index = findIndex(currentSong, newList)
+      changePlayListDispatch(newList)
+      changeCurrentIndexDispatch(index)
+    }
+    changeModeDispatch(newMode)
   }
   const handleChangeCurrentIndex = (index) => {
     if (currentIndex === index) return
     changeCurrentIndexDispatch(index)
+  }
+  const handleDeleteSong = (e, song) => {
+    e.stopPropagation()
+    deleteSongDispatch(song)
+  }
+  const handleShowClear = () => {
+    confirmRef.current.show()
+  }
+  const handleConfirmClear = () => {
+    clearDispatch()
+  }
+  const handleScroll = (pos) => {
+    // 只有当内容偏移量为 0 的时候才能下滑关闭 PlayList。否则一边内容在移动，一边列表在移动，出现 bug
+    let state = pos.y === 0
+    setCanTouch(state)
+  }
+  const handleTouchStart = (e) => {
+    if (!canTouch || initialed) return
+    listWrapperRef.current.style['transition'] = ''
+    setStartY(e.nativeEvent.touches[0].pageY) // 记录 y 值
+    setInitialed(true)
+  }
+  const handleTouchMove = (e) => {
+    if (!canTouch || !initialed) return
+    let distance = e.nativeEvent.touches[0].pageY - startY
+    if (distance < 0) return
+    setDistance(distance) // 记录下滑距离
+    listWrapperRef.current.style.transform = `translate3d(0, ${distance}px, 0)`
+  }
+  const handleTouchEnd = (e) => {
+    setInitialed(false)
+    // 这里设置阈值为 150px
+    if (distance >= 150) {
+      // 大于 150px 则关闭 PlayList
+      togglePlayListDispatch(false)
+    } else {
+      // 否则反弹回去
+      listWrapperRef.current.style['transition'] = 'all 0.3s'
+      listWrapperRef.current.style[transform] = `translate3d(0px, 0px, 0px)`
+    }
   }
 
   const onEnterCB = useCallback(() => {
@@ -127,16 +195,25 @@ function PlayList(props) {
           className="list_wrapper"
           ref={listWrapperRef}
           onClick={(e) => e.stopPropagation()}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
         >
           <ListHeader>
             <h1 className="title">
               {getPlayMode()}
-              <span className="iconfont clear">&#xe63d;</span>
+              <span className="iconfont clear" onClick={handleShowClear}>
+                &#xe63d;
+              </span>
             </h1>
           </ListHeader>
 
           <ScrollWrapper>
-            <Scroll>
+            <Scroll
+              ref={listContentRef}
+              onScroll={(pos) => handleScroll(pos)}
+              bounceTop={false}
+            >
               <ListContent>
                 {playList.map((item, index) => {
                   return (
@@ -152,7 +229,10 @@ function PlayList(props) {
                       <span className="like">
                         <i className="iconfont">&#xe601;</i>
                       </span>
-                      <span className="delete">
+                      <span
+                        className="delete"
+                        onClick={(e) => handleDeleteSong(e, item)}
+                      >
                         <i className="iconfont">&#xe63d;</i>
                       </span>
                     </li>
@@ -161,6 +241,14 @@ function PlayList(props) {
               </ListContent>
             </Scroll>
           </ScrollWrapper>
+
+          <Confirm
+            ref={confirmRef}
+            text={'是否删除全部？'}
+            cancelBtnText={'取消'}
+            confirmBtnText={'确定'}
+            handleConfirm={handleConfirmClear}
+          />
         </div>
       </PlayListWrapper>
     </CSSTransition>
@@ -188,6 +276,17 @@ const mapDispatchToProps = (dispatch) => {
     },
     changePlayListDispatch(data) {
       dispatch(changePlayList(data))
+    },
+    deleteSongDispatch(data) {
+      dispatch(deleteSong(data))
+    },
+    clearDispatch() {
+      dispatch(changePlayList([]))
+      dispatch(changeSequecePlayList([]))
+      dispatch(changeCurrentIndex(-1))
+      dispatch(changeShowPlayList(false))
+      dispatch(changeCurrentSong({}))
+      dispatch(changePlayingState(false))
     }
   }
 }

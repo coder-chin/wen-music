@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-const baseURL = 'https://music-api.imchin.top'
+// const baseURL = 'https://music-api.imchin.top'
+const baseURL = 'https://wen-music.vercel.app/'
 
 const musicApi = axios.create({
   baseURL
