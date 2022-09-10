@@ -15,9 +15,16 @@ const Home = (props) => {
   return (
     <div>
       <Top>
-        <span className="iconfont menu">&#xe65c;</span>
+        <span
+          className="iconfont menu"
+          onClick={() => alert('作者要写下一个项目了!~')}
+        >
+          &#xe65c;
+        </span>
         <span className="title">MusicWebApp</span>
-        <span className="iconfont search" onClick={() => handleClickSearch()}>&#xe62b;</span>
+        <span className="iconfont search" onClick={() => handleClickSearch()}>
+          &#xe62b;
+        </span>
       </Top>
       <Tab>
         <NavLink to="/recommend" activeClassName="selected">
