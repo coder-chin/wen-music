@@ -7,6 +7,7 @@ import {
   changeSequecePlayList
 } from '../../pages/Player/store/actionCreators'
 import { connect } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 const SongsList = React.forwardRef((props, refs) => {
   const { collectCount, showCollect, songs } = props
@@ -17,6 +18,7 @@ const SongsList = React.forwardRef((props, refs) => {
   } = props
   // 触发动画
   const { musicAnimation } = props
+  let navigate = useNavigate()
 
   const totalCount = songs.length
 

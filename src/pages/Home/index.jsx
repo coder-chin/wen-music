@@ -1,12 +1,13 @@
 import React from 'react'
-import { NavLink, Outlet } from 'react-router-dom'
+import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import { Top, Tab, TabItem } from './style'
 
 import Player from '../Player'
 
-const Home = (props) => {
+const Home = () => {
+  let navigate = useNavigate()
   const handleClickSearch = () => {
-    props.history.push('/search')
+    navigate('/search')
   }
 
   return (
@@ -14,7 +15,7 @@ const Home = (props) => {
       <Top>
         <span
           className="iconfont menu"
-          onClick={() => alert('作者要写下一个项目了!~')}
+          onClick={() => alert('本项目告一段落，作者要写下一个项目了!~')}
         >
           &#xe65c;
         </span>
@@ -24,17 +25,17 @@ const Home = (props) => {
         </span>
       </Top>
       <Tab>
-        <NavLink to="/" activeClassName="selected">
+        <NavLink to="/" activeclassname="selected">
           <TabItem>
             <span> 推荐 </span>
           </TabItem>
         </NavLink>
-        <NavLink to="/singers" activeClassName="selected">
+        <NavLink to="/singers" activeclassname="selected">
           <TabItem>
             <span> 歌手 </span>
           </TabItem>
         </NavLink>
-        <NavLink to="/rank" activeClassName="selected">
+        <NavLink to="/rank" activeclassname="selected">
           <TabItem>
             <span> 榜单 </span>
           </TabItem>

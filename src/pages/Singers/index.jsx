@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useEffect, useContext } from 'react'
 import { connect } from 'react-redux'
 import LazyLoad, { forceCheck } from 'react-lazyload'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 
 import { categoryTypes, alphaTypes } from '../../constant'
 import { NavContainer, ListContainer, List, ListItem } from './style'
@@ -18,7 +18,7 @@ import {
 import Horizen from '../../UI/Horizen'
 import Scroll from '../../UI/Scroll'
 import Loading from '../../UI/Loading'
-import { CategoryDataContext } from './context'
+import { CategoryDataContext, CHANGE_ALPHA, CHANGE_CATEGORY } from './context'
 
 const Singers = (props) => {
   const { data, dispatch } = useContext(CategoryDataContext)
@@ -38,6 +38,7 @@ const Singers = (props) => {
     pullUpRefreshDispatch,
     pullDownRefreshDispatch
   } = props
+  let navigate = useNavigate()
 
   useEffect(() => {
     if (!singerList.size) {
@@ -66,7 +67,7 @@ const Singers = (props) => {
   }
 
   const enterDetail = (id) => {
-    props.history.push(`/singers/${id}`)
+    navigate(`/singers/${id}`)
   }
 
   const singerListJS = singerList ? singerList.toJS() : []

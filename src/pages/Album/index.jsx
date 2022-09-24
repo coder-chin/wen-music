@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react'
 import { connect } from 'react-redux'
+import { useParams, useNavigate } from 'react-router-dom'
 import { CSSTransition } from 'react-transition-group'
 
 import { Container, TopDesc, Menu } from './style'
@@ -14,14 +15,15 @@ import { getAlbumList, changeEnterLoading } from './store/actionCreators'
 import { HEADER_HEIGHT } from '../../constant'
 
 function Album(props) {
-  const id = props.match.params.id
-
+  let params = useParams()
+  let navigate = useNavigate()
   const [showStatus, setShowStatus] = useState(true)
   const [title, setTitle] = useState('歌单')
   const [isMarquee, setIsMarquee] = useState(false)
   const headerEl = useRef()
   const musicNoteRef = useRef()
 
+  const id = params.id
   const {
     currentAlbum: currentAlbumImmutable,
     enterLoading,
@@ -120,7 +122,7 @@ function Album(props) {
       classNames="fly"
       appear={true}
       unmountOnExit
-      onExited={props.history.goBack}
+      onExited={() => navigate(-1)}
     >
       <Container play={songsCount}>
         <Header

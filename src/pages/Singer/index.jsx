@@ -1,6 +1,7 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react'
 import { CSSTransition } from 'react-transition-group'
 import { connect } from 'react-redux'
+import { useParams, useNavigate } from 'react-router-dom'
 import { getSingerInfo, changeEnterLoading } from './store/actionCreators'
 import {
   Container,
@@ -18,6 +19,8 @@ import { HEADER_HEIGHT } from '../../constant'
 
 function Singer(props) {
   const [showStatus, setShowStatus] = useState(true)
+  let params = useParams()
+  let navigate = useNavigate()
 
   const collectButton = useRef()
   const imageWrapper = useRef()
@@ -31,7 +34,7 @@ function Singer(props) {
   const OFFSET = 5
 
   useEffect(() => {
-    const id = props.match.params.id
+    const id = params.id
     getSingerDataDispatch(id)
     let h = imageWrapper.current.offsetHeight
     songScrollWrapper.current.style.top = `${h - OFFSET}px`
@@ -101,7 +104,7 @@ function Singer(props) {
       classNames="fly"
       appear={true}
       unmountOnExit
-      onExited={() => props.history.goBack()}
+      onExited={() => navigate(-1)}
     >
       <Container play={songsCount}>
         <Header

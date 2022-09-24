@@ -1,12 +1,14 @@
 import React from 'react'
 import LazyLoad from 'react-lazyload'
+import { useNavigate } from 'react-router-dom'
 
 import { ListWrapper, ListItem, List } from './style'
 import { getCount } from '../../utils'
 
 const RecommendList = (props) => {
+  let navigate = useNavigate()
   const enterDetail = (id) => {
-    props.history.push(`recommend/${id}`)
+    navigate(`recommend/${id}`)
   }
 
   return (

@@ -1,6 +1,6 @@
 import React from 'react'
-import { useEffect } from 'react'
-import { useState } from 'react'
+import { useEffect,useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { CSSTransition } from 'react-transition-group'
 import { connect } from 'react-redux'
 import LazyLoad, { forceCheck } from 'react-lazyload'
@@ -37,6 +37,7 @@ function Search(props) {
 
   const [show, setShow] = useState(false)
   const [query, setQuery] = useState('')
+  let navigate = useNavigate()
 
   // 控制动画显示
   useEffect(() => {
@@ -87,7 +88,7 @@ function Search(props) {
           return (
             <ListItem
               key={item.accountId + '' + index}
-              onClick={() => props.history.push(`/singers/${item.id}`)}
+              onClick={() => navigate(`/singers/${item.id}`)}
             >
               <div className="img_wrapper">
                 <LazyLoad
@@ -125,7 +126,7 @@ function Search(props) {
           return (
             <ListItem
               key={item.accountId + '' + index}
-              onClick={() => props.history.push(`/album/${item.id}`)}
+              onClick={() => navigate(`/album/${item.id}`)}
             >
               <div className="img_wrapper">
                 <LazyLoad
@@ -183,7 +184,7 @@ function Search(props) {
       appear={true}
       classNames="fly"
       unmountOnExit
-      onExited={() => props.history.goBack()}
+      onExited={() => navigate(-1)}
     >
       <Container play={songsCount}>
         <SearchBox

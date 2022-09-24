@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 
 import Scroll from '../../UI/Scroll'
 import { getRankList } from './store'
@@ -13,13 +13,13 @@ const Rank = (props) => {
 
   let rankListJS = rankList ? rankList.toJS() : []
   let displayStyle = loading ? { display: 'none' } : { display: '' }
+  let navigate = useNavigate()
 
   useEffect(() => {
     getRankListDataDispatch()
   }, [])
   const enterDetail = (detail) => {
-    console.log(detail)
-    props.history.push(`/rank/${detail.id}`)
+    navigate(`/rank/${detail.id}`)
   }
 
   let globalStartIndex = filterIndex(rankListJS)
