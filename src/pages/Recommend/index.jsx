@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { forceCheck } from 'react-lazyload'
-import { renderRoutes } from 'react-router-config'
+import { Outlet } from 'react-router-dom'
 
 import { Content } from './style'
 import Scroll from '../../UI/Scroll'
@@ -35,7 +35,7 @@ const Recommend = (props) => {
         </div>
       </Scroll>
       <Loading show={enterLoading}></Loading>
-      {renderRoutes(props.route.routes)}
+      <Outlet />
     </Content>
   )
 }

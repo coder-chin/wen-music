@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { renderRoutes } from 'react-router-config'
+import { Outlet } from 'react-router-dom'
 
 import Scroll from '../../UI/Scroll'
 import { getRankList } from './store'
@@ -76,7 +76,7 @@ const Rank = (props) => {
           {renderRankList(globalList, true)}
         </div>
       </Scroll>
-      {renderRoutes(props.route.routes)}
+      <Outlet />
     </Container>
   )
 }

@@ -1,6 +1,5 @@
 import React from 'react'
 import LazyLoad from 'react-lazyload'
-import { withRouter } from 'react-router-dom'
 
 import { ListWrapper, ListItem, List } from './style'
 import { getCount } from '../../utils'
@@ -52,4 +51,4 @@ const RecommendList = (props) => {
   )
 }
 
-export default React.memo(withRouter(RecommendList))
+export default React.memo(RecommendList)

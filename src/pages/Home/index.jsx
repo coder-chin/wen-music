@@ -1,13 +1,10 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
-import { renderRoutes } from 'react-router-config'
+import { NavLink, Outlet } from 'react-router-dom'
 import { Top, Tab, TabItem } from './style'
 
 import Player from '../Player'
 
 const Home = (props) => {
-  const { route } = props
-
   const handleClickSearch = () => {
     props.history.push('/search')
   }
@@ -27,7 +24,7 @@ const Home = (props) => {
         </span>
       </Top>
       <Tab>
-        <NavLink to="/recommend" activeClassName="selected">
+        <NavLink to="/" activeClassName="selected">
           <TabItem>
             <span> 推荐 </span>
           </TabItem>
@@ -44,7 +41,7 @@ const Home = (props) => {
         </NavLink>
       </Tab>
 
-      {renderRoutes(route.routes)}
+      <Outlet />
       <Player />
     </div>
   )

@@ -1,10 +1,8 @@
-import { renderRoutes } from 'react-router-config'
 import { Provider } from 'react-redux'
-import { HashRouter } from 'react-router-dom'
 
 import GlobalStyle from '@/assets/style/style'
 import IconStyle from '@/assets/icon/iconfont'
-import routes from '@/routes/index.jsx'
+import AppRouter from '@/routes/index.jsx'
 import store from './store'
 import { Data } from './pages/Singers/context'
 
@@ -13,7 +11,9 @@ function App() {
     <Provider store={store}>
       <GlobalStyle />
       <IconStyle />
-      <Data>{renderRoutes(routes)}</Data>
+      <Data>
+        <AppRouter />
+      </Data>
     </Provider>
   )
 }

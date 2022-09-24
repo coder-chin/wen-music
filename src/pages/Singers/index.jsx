@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { connect } from 'react-redux'
 import LazyLoad, { forceCheck } from 'react-lazyload'
-import { renderRoutes } from 'react-router-config'
+import { Outlet } from 'react-router-dom'
 
 import { categoryTypes, alphaTypes } from '../../constant'
 import { NavContainer, ListContainer, List, ListItem } from './style'
@@ -128,7 +128,7 @@ const Singers = (props) => {
         <Loading show={enterLoading}></Loading>
       </ListContainer>
 
-      {renderRoutes(props.route.routes)}
+      <Outlet />
     </div>
   )
 }
