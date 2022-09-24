@@ -24,18 +24,11 @@ export default [
     routes: [
       {
         path: '/',
-        exact: true,
-        render: () => <Redirect to={'/recommend'} />
+        component: SuspenseComponent(Recommend)
       },
       {
-        path: '/recommend',
-        component: SuspenseComponent(Recommend),
-        routes: [
-          {
-            path: '/recommend/:id',
-            component: SuspenseComponent(Album)
-          }
-        ]
+        path: '/recommend/:id',
+        component: SuspenseComponent(Album)
       },
       {
         path: '/singers',
