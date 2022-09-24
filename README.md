@@ -4,9 +4,9 @@
 
 > 欢迎交流！
 
-项目地址: https://music.imchin.top
+⚡ 项目地址: https://music.imchin.top
 
-在线预览:
+🚀 在线预览:
 
 ![qrcode](/img/url.png)
 
@@ -22,4 +22,4 @@
 
 ## 鸣谢
 
-后端部署的 API 使用的是 [大佬的高star开源项目](https://github.com/Binaryify/NeteaseCloudMusicApi)
+🎉 后端部署的 API 使用的是 [大佬的高star开源项目](https://github.com/Binaryify/NeteaseCloudMusicApi)
