@@ -23,3 +23,7 @@
 ## 鸣谢
 
 🎉 后端部署的 API 使用的是 [大佬的高star开源项目](https://github.com/Binaryify/NeteaseCloudMusicApi)
+
+## TODO
+
+- [ ] TS重构
